@@ -28,7 +28,7 @@
       @foreach($users as $user)
       <tr>
         <td>{{$user->id}}</td>
-        <td>{{$user->name}}</td>
+       <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{$user->role->name}}</td>
         <td>{{$user->is_active ==0 ? "Non active" :"Active"}}</td>

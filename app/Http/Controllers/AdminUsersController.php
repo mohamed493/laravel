@@ -46,12 +46,14 @@ class AdminUsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @return array|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(UserRequest $request)
     {
         // UserRequest to apply required fields
-        return $request->all();
+        User::create($request->all());
+
+        return  redirect('/admin/users');
     }
 
     /**
