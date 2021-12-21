@@ -19,7 +19,7 @@
                              </div>
                              <div class="form-group">
                                  {!! Form::label('status','Status:') !!}
-                                 {!! Form::select('Status', ['0' => 'Non active', '1' => 'Active'], 'S'); !!}
+                                 {!! Form::select('is_active', ['0' => 'Non active', '1' => 'Active']); !!}
                              </div>
 
                              <div class="form-group">

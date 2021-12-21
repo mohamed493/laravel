@@ -52,18 +52,22 @@ class AdminUsersController extends Controller
     public function store(UserRequest $request)
     {
         // UserRequest to apply required fields
-
+        if($request->password==''){
+            $input=$request->except('password');
+        }
         $input=$request->all();
         if($file=$request->file('photo_id')){
             $name=time().$file->getClientOriginalName();
             $file->move('images' ,$name) ;
+
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id ;
            // return  'photo exist' ;
         }
         $input['password']=bcrypt($request->password);
         User::create($input);
-      //  return  redirect('/admin/users');
+
+        return  redirect('/admin/users');
     }
 
     /**
@@ -81,11 +85,18 @@ class AdminUsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|View
      */
     public function edit($id)
     {
         //
+        $user=User::findorfail($id);
+        $arrayOfRolesNames=[];
+        $roles=Role::all();
+        foreach ($roles as $role){
+            array_push($arrayOfRolesNames,  $role->name);
+        }
+        return  view('admin.users.edit' ,compact('arrayOfRolesNames' ,'user'));
     }
 
     /**
@@ -93,11 +104,27 @@ class AdminUsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|View
      */
     public function update(Request $request, $id)
     {
         //
+        $user=User::findOrFail($id);
+
+      //  return view('admin.users.index');
+        $input=$request->all();
+        if($file=$request->file('photo_id')){
+            $name=time().$file->getClientOriginalName();
+            $file->move('images' ,$name) ;
+
+            $photo=Photo::create(['file'=>$name]);
+            $input['photo_id']=$photo->id ;
+            // return  'photo exist' ;
+        }
+        $input['password']=bcrypt($request->password);
+        $user->update($input);
+
+        return  redirect('/admin/users');
     }
 
     /**
