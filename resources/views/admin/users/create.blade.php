@@ -34,7 +34,7 @@
                              </div>
                              <div class="form-group">
                                  {!! Form::label('file','File') !!}
-                                 {!! Form::file('photo_id',$arrayOfRolesNames );!!}
+                                 {!! Form::file('photo_id' );!!}
 
                              </div>
 

@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AdminUsersController extends Controller
@@ -131,10 +132,15 @@ class AdminUsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {
         //
+        $user=User::findOrFail($id);
+        unlink(public_path()."\images/".$user->photo->file);
+        $user->delete();
+        session::flash('deleted_user','The user has been deleted');
+        return redirect('/admin/users');
     }
 }

@@ -9,7 +9,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+@if(Session::has('deleted_user'))
+  <p class='bg-danger'>{{Session('deleted_user')}}</p>
 
+@endif
 <div class="container">
   <h2>Users</h2>
   <table class="table">
