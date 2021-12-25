@@ -36,8 +36,8 @@
       <tr>
         <td>{{$post->id}}</td>
           <td>{{$post->user->name}}</td>
-          <td>{{$post->category}}</td>
-{{--          <td>{{$post->user->photo->file}}</td>--}}
+{{--          <td>{{$post->category['name']}}</td>--}}
+        <td>{{$post->category->name}}</td>
         <td><img height="50" src='/hacking/public/images/{{$post->photo['file']}}' class="img-fluid"></td>
         <td>{{$post->title}}</td>
         <td>{{$post->body}}</td>

@@ -11,7 +11,7 @@
                            </div>
                             <div class="form-group">
                                 {!! Form::label('category_id','Category:') !!}
-                                {!! Form::select('category_id', ['0' => 'Non active', '1' => 'Active']); !!}
+                                {!! Form::select('category_id', $categories); !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('file','File') !!}
